@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+
+    <div class="hero-text">
+
+        <h3>Hello, I'm</h3>
+
+        <h1>Akshita Gour</h1>
+
+        <h2>DevOps | DevSecOps | Cloud | Cyber Security Engineer</h2>
+
+        <p>
+            Passionate about Cloud Computing, DevOps, DevSecOps,
+            Cyber Security, Web Application Security, VAPT,
+            Docker, Kubernetes, AWS and Secure CI/CD Pipelines.
+            I enjoy building secure, scalable and automated applications.
+        </p>
+
+        <div class="buttons">
+
+            <a href="/projects" class="btn">
+                View Projects
+            </a>
+
+            <a href="/contact" class="btn-outline">
+                Contact Me
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="hero-image">
+
+        <img src="{{ url_for('static', filename='images/profile.jpeg') }}"
+             alt="Akshita Gour">
+
+    </div>
+
+</section>
+
+<section class="quick-about">
+
+    <h2>About Me</h2>
+
+    <p>
+        I am passionate about DevOps, DevSecOps, Cloud Computing and Cyber Security.
+        I enjoy building secure cloud-native applications using Python, Flask,
+        Docker, Kubernetes and AWS while following DevSecOps best practices.
+    </p>
+
+    <div class="buttons" style="justify-content:center; margin-top:30px;">
+
+        <a href="/about" class="btn">
+            Read More
+        </a>
+
+    </div>
+
+</section>
+
+<section class="highlights">
+
+    <div class="card">
+
+        <h3>⚙ DevOps</h3>
+
+        <p>
+            Docker, Git, GitHub Actions, Jenkins, Kubernetes
+        </p>
+
+    </div>
+
+    <div class="card">
+
+        <h3>☁ Cloud</h3>
+
+        <p>
+            AWS, Linux, EC2, IAM, S3, VPC
+        </p>
+
+    </div>
+
+    <div class="card">
+
+        <h3>🛡 DevSecOps</h3>
+
+        <p>
+            Trivy, Gitleaks, Semgrep, Secure CI/CD
+        </p>
+
+    </div>
+
+    <div class="card">
+
+        <h3>🌐 Cyber Security</h3>
+
+        <p>
+            CEH, eJPT, VAPT, Web Security, OWASP Top 10
+        </p>
+
+    </div>
+
+</section>
+
+<section class="quick-about">
+
+    <h2>Featured Projects</h2>
+
+    <p>
+        Explore my DevOps Portfolio and Docker Learning repositories,
+        where I document my hands-on journey in Cloud, DevOps and Automation.
+    </p>
+
+    <div class="buttons" style="justify-content:center; margin-top:30px;">
+
+        <a href="/projects" class="btn">
+            Explore Projects
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}

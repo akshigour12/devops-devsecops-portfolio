@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}Akshita Gour Portfolio{% endblock %}</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="container">
+
+        <div class="logo">
+
+            <a href="/" style="text-decoration:none;color:#38bdf8;">
+                Akshita Gour
+            </a>
+
+        </div>
+
+        <nav>
+
+            <ul>
+
+                <li><a href="/">Home</a></li>
+
+                <li><a href="/about">About</a></li>
+
+                <li><a href="/skills">Skills</a></li>
+
+                <li><a href="/projects">Projects</a></li>
+
+                <li><a href="/certifications">Certifications</a></li>
+
+                <li><a href="/contact">Contact</a></li>
+
+            </ul>
+
+        </nav>
+
+    </div>
+
+</header>
+
+<main>
+
+    {% block content %}
+
+    {% endblock %}
+
+</main>
+
+<footer>
+
+    <div class="container">
+
+        <div>
+
+            <h2>Akshita Gour</h2>
+
+            <p>
+                DevOps | DevSecOps | Cloud | Cyber Security Engineer
+            </p>
+
+        </div>
+
+        <div>
+
+            <p>
+                <a href="https://github.com/akshigour12"
+                   target="_blank">
+                    GitHub
+                </a>
+            </p>
+
+            <p>
+                <a href="https://www.linkedin.com/"
+                   target="_blank">
+                    LinkedIn
+                </a>
+            </p>
+
+            <p>
+                <a href="/contact">
+                    Contact Me
+                </a>
+            </p>
+
+        </div>
+
+    </div>
+
+    <hr style="margin:30px 0;border-color:#334155;">
+
+    <p style="text-align:center;">
+        © 2026 Akshita Gour | All Rights Reserved
+    </p>
+
+</footer>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+
+</html>

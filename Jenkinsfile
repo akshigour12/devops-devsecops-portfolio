@@ -9,33 +9,45 @@ pipeline {
             }
         }
 
-        stage('Setup Python') {
+        stage('Setup Python Environment') {
             steps {
-                sh 'python3 --version'
-                sh 'pip3 install -r requirements.txt'
+                sh '''
+                    python3 --version
+                    python3 -m venv .venv
+                    .venv/bin/python -m pip install --upgrade pip
+                    .venv/bin/pip install -r requirements.txt
+                '''
             }
         }
 
         stage('Run Tests') {
             steps {
-                sh 'pytest'
+                sh '''
+                    .venv/bin/python -m pytest -v tests/
+                '''
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t devops-devsecops-portfolio:latest .'
+                sh '''
+                    docker build -t devops-devsecops-portfolio:ci .
+                '''
             }
         }
     }
 
     post {
         success {
-            echo 'Pipeline completed successfully!'
+            echo 'Jenkins CI pipeline completed successfully.'
         }
 
         failure {
-            echo 'Pipeline failed!'
+            echo 'Jenkins CI pipeline failed.'
+        }
+
+        always {
+            echo 'Pipeline execution finished.'
         }
     }
 }

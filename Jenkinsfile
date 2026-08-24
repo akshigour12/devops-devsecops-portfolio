@@ -1,53 +1,22 @@
-pipeline {
-    agent any
+stage('Deploy to EC2') {
+    steps {
+        sshagent(credentials: ['ec2-ssh']) {
+            sh '''
+            ssh -o StrictHostKeyChecking=no ec2-user@13.201.21.141 << EOF
 
-    stages {
+            docker pull akshigour12/devops-devsecops-portfolio:latest
 
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
+            docker stop devops-devsecops-portfolio || true
+            docker rm devops-devsecops-portfolio || true
 
-        stage('Setup Python Environment') {
-            steps {
-                sh '''
-                    python3 --version
-                    python3 -m venv .venv
-                    .venv/bin/python -m pip install --upgrade pip
-                    .venv/bin/pip install -r requirements.txt
-                '''
-            }
-        }
+            docker run -d \
+              --name devops-devsecops-portfolio \
+              --restart always \
+              -p 80:5000 \
+              akshigour12/devops-devsecops-portfolio:latest
 
-        stage('Run Tests') {
-            steps {
-                sh '''
-                    .venv/bin/python -m pytest -v tests/
-                '''
-            }
-        }
-
-        stage('Build Docker Image') {
-            steps {
-                sh '''
-                    docker build -t devops-devsecops-portfolio:ci .
-                '''
-            }
-        }
-    }
-
-    post {
-        success {
-            echo 'Jenkins CI pipeline completed successfully.'
-        }
-
-        failure {
-            echo 'Jenkins CI pipeline failed.'
-        }
-
-        always {
-            echo 'Pipeline execution finished.'
+            EOF
+            '''
         }
     }
 }

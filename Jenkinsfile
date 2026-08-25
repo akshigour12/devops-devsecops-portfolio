@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         IMAGE_NAME = "akshigour12/devops-devsecops-portfolio:latest"
-        EC2_HOST = "13.201.21.141"
+        EC2_HOST = "13.232.53.81"
     }
 
     stages {

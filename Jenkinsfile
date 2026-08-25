@@ -38,7 +38,7 @@ pipeline {
 
         stage('Push Docker Image') {
             steps {
-                withDockerRegistry([credentialsId: 'dockerhub-creds', url: '']) {
+                withDockerRegistry([credentialsId: 'dockerhub', url: '']) {
                     sh '''
                         docker push akshigour12/devops-devsecops-portfolio:latest
                     '''

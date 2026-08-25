@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    environment {
+        IMAGE_NAME = "akshigour12/devops-devsecops-portfolio:latest"
+        EC2_HOST = "13.201.21.141"
+    }
+
     stages {
 
         stage('Checkout') {
@@ -31,7 +36,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 sh '''
-                    docker build -t akshigour12/devops-devsecops-portfolio:latest .
+                    docker build -t ${IMAGE_NAME} .
                 '''
             }
         }
@@ -40,7 +45,7 @@ pipeline {
             steps {
                 withDockerRegistry([credentialsId: 'dockerhub', url: '']) {
                     sh '''
-                        docker push akshigour12/devops-devsecops-portfolio:latest
+                        docker push ${IMAGE_NAME}
                     '''
                 }
             }
@@ -48,20 +53,34 @@ pipeline {
 
         stage('Deploy to EC2') {
             steps {
-                sshagent(credentials: ['ec2-ssh']) {
+                withCredentials([
+                    sshUserPrivateKey(
+                        credentialsId: 'ec2-ssh',
+                        keyFileVariable: 'SSH_KEY',
+                        usernameVariable: 'SSH_USER'
+                    )
+                ]) {
                     sh '''
-                        ssh -o StrictHostKeyChecking=no ec2-user@13.201.21.141 << EOF
-                        docker pull akshigour12/devops-devsecops-portfolio:latest
+                        chmod 600 $SSH_KEY
+
+                        ssh -i $SSH_KEY \
+                            -o StrictHostKeyChecking=no \
+                            $SSH_USER@$EC2_HOST << EOF
+
+                        docker pull ${IMAGE_NAME}
 
                         docker stop devops-devsecops-portfolio || true
                         docker rm devops-devsecops-portfolio || true
 
                         docker run -d \
-                          --name devops-devsecops-portfolio \
-                          --restart always \
-                          -p 80:5000 \
-                          akshigour12/devops-devsecops-portfolio:latest
-                        EOF
+                            --name devops-devsecops-portfolio \
+                            --restart always \
+                            -p 80:5000 \
+                            ${IMAGE_NAME}
+
+                        docker image prune -f
+
+EOF
                     '''
                 }
             }

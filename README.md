@@ -284,24 +284,4 @@ Thank you for inspiring and guiding aspiring DevOps engineers through your educa
 
 ---
 
-# ⭐ Show Your Support
 
-If you found this project helpful or inspiring:
-
-⭐ Star this repository
-
-🍴 Fork it
-
-📢 Share it with others
-
-Your support is greatly appreciated!
-
----
-
-## 📜 License
-
-This project is licensed under the **MIT License**.
-
----
-
-## ❤️ Made with Passion by Akshita Gour

@@ -6,13 +6,6 @@ The project demonstrates modern DevOps practices including automated testing, co
 
 ---
 
-## 🌐 Live Demo
-
-**Portfolio Website:**  
-http://13.232.53.81
-
----
-
 # 📌 Features
 
 - Responsive Portfolio Website
